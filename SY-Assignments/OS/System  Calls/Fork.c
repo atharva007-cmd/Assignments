@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "Function.c"
-char emptyString[1000];
+#include "Function.h"
 
 int main()
 {
@@ -22,7 +21,9 @@ int main()
     }
 
     // Converting Integer Array to String
-    intToString (num, arr, str, mainStr, emptyString);
+    intToString (num, arr, str, mainStr);
+    mainStr[(strlen(mainStr))-1]='\0';
+    
     char *args[] = {mainStr, NULL};
 
     // fork
