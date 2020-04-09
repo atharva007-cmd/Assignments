@@ -68,7 +68,7 @@ int main()
         for (temp=head; temp!=NULL; temp=temp->next)
         {
             if (temp->comp!=1 && temp->AT<=i && temp->BT1<min) min=temp->BT1;
-	    if (!(temp->comp)) temp->TAT++;
+	        if (!(temp->comp)) temp->TAT++;
         }
         
         // Traversing to the process with least remaining BT
