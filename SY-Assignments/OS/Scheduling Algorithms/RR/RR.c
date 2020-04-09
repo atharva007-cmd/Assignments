@@ -67,8 +67,8 @@ int main()
         // Finding the process with least remaining BT
         for (temp=head; temp!=NULL; temp=temp->next)
         {
-            if (temp->comp!=1 && temp->AT<=i && temp->BT1<min)
-                min=temp->BT1;
+            if (temp->comp!=1 && temp->AT<=i && temp->BT1<min) min=temp->BT1;
+	    if (!(temp->comp)) temp->TAT++;
         }
         
         // Traversing to the process with least remaining BT
@@ -81,7 +81,6 @@ int main()
                 if (temp->BT1==0)
                 {
                     temp->comp=1;
-                    temp->TAT=i-(temp->AT)+1;
                     count++;
                 }
                 break;
@@ -92,7 +91,7 @@ int main()
     }
 
     // Calculating Total WT, TAT
-    for (i=0, temp=head; temp!=NULL; temp=temp->next)
+    for (temp=head; temp!=NULL; temp=temp->next)
     {
         temp->WT=(temp->TAT)-(temp->BT2);
         totalWT += (temp->WT);
