@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BOOK="address.txt"
+
+dialog --inputbox "Enter the name of the person whose records you want to search." 10 40 2>.input
+name=$(cat .input)
+
+dialog --msgbox "$(grep -i $name $BOOK)" 10 40
+exit 0
+ 
