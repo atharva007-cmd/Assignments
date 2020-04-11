@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BOOK="address.txt"
+dialog --inputbox "Please enter name!" 10 35 2>.input 
+name=$(cat .input)
+dialog --inputbox "Please enter phone number!" 10 35 2>.input 
+phno=$(cat .input)
+dialog --inputbox "Please enter city!" 10 35 2>.input 
+city=$(cat .input)
+dialog --inputbox "Please enter e-mail!" 10 35 2>.input 
+email=$(cat .input)
+dialog --inputbox "Do you wish to add the above details in the address book?{Y/N}:" 10 35 2>.input 
+opt=$(cat .input)
+if [ $opt = "Y" ]
+then
+   echo "$name : $phno : $city : $email" >>$BOOK
+   dialog --msgbox "Record added successfully!" 10 35
+else
+   dialog --msgbox "$name : $phno : $city : $email were not added in the record" 10 35
+fi
+exit 0
+
+
