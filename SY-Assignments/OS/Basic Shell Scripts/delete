@@ -1,0 +1,9 @@
+#!/bin/bash
+BOOK="address.txt"
+dialog --inputbox "Please enter name of the person whose entry you want to delete from the records!" 10 40 2>.input
+name=$(cat .input)
+grep -v $name $BOOK > temp.txt
+rm $BOOK
+mv temp.txt $BOOK
+dialog --msgbox "Record deleted successfully." 10 40
+exit 0
