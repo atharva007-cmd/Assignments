@@ -1,0 +1,6 @@
+#!/bin/bash
+BOOK="address.txt"
+dialog --msgbox "$(nl --number-separator=" : " $BOOK | less)" 15 50
+exit 0
+
+
