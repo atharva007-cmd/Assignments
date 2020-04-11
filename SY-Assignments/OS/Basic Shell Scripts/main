@@ -1,0 +1,36 @@
+#!/bin/bash
+
+BOOK="address.txt"
+exit=0
+
+while [ $exit -ne 1 ]
+do
+  dialog --backtitle "MENU" --inputbox "Select your option:\n \
+                                        1. ADD records \
+                                        2. LIST records \
+                                        3. SEARCH record \
+                                        4. DELETE record \
+                                        5. EXIT.\n" 17 30 2>.input
+  choice=$(cat .input)
+  if [ "$choice" = "1" ]
+  then
+	./add
+  elif [ "$choice" = "2" ]
+  then
+	./list
+  elif [ "$choice" = "3" ]
+  then
+	./search
+  elif [ "$choice" = "4" ]
+  then
+	./delete
+  elif [ "$choice" = "5" ]
+  then 
+	exit=1
+  else
+	dialog --msgbox "Please enter a valid function!" 10 40 
+  fi
+done
+clear
+rm .input
+exit 0
