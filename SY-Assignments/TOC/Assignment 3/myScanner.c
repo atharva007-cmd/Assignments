@@ -24,6 +24,10 @@ int main (void)
         case 4:
             printf(" KEY_WORD ");
             break;
+
+        case 5:
+            printf(" DELIMITER ");
+            break;
         }
         token = yylex();
     }

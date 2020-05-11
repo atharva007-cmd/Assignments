@@ -1,5 +1,5 @@
 %{
-    enum LEXICAL_TOKENS{COMMENTS=1, ACCESS_SPECIFIERS, SEPERATORS, KEYWORDS};
+    enum LEXICAL_TOKENS{COMMENTS=1, ACCESS_SPECIFIERS, SEPERATORS, KEYWORDS, DELIMITER};
 %}
 
 %%
@@ -20,7 +20,8 @@
 ["]+.*["]+     printf(" \"STRING\" ");
 
 "("|")"|"{"|"}"|"["|"]" return SEPERATORS;
-(,|;|:|".") return SEPERATORS;
+(,|:|".") return SEPERATORS;
+";" return DELIMITER;
 
 "/*" {
     char c;
