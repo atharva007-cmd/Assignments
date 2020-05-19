@@ -14,7 +14,6 @@ public class Main
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
 	static Scanner scanner = new Scanner(System.in);
 	
-	
 	public static void main (String[] args)
 	{
 		int choice = 0;
