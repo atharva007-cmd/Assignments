@@ -1,0 +1,66 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.SpringLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+
+public class insertQuery extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField firstNameTextField;
+	private JTextField textField;
+
+	// Main Method
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					insertQuery frame = new insertQuery();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	public insertQuery() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 300);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel firstNameLabel = new JLabel("First Name");
+		firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		firstNameLabel.setBounds(50, 75, 75, 20);
+		contentPane.add(firstNameLabel);
+		
+		firstNameTextField = new JTextField();
+		firstNameTextField.setFont(new Font("Arial", Font.PLAIN, 11));
+		firstNameTextField.setBounds(125, 75, 200, 20);
+		contentPane.add(firstNameTextField);
+		firstNameTextField.setColumns(10);
+		
+		JLabel lblLastName = new JLabel("Last Name");
+		lblLastName.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblLastName.setBounds(50, 125, 75, 20);
+		contentPane.add(lblLastName);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Arial", Font.PLAIN, 11));
+		textField.setColumns(10);
+		textField.setBounds(125, 125, 200, 20);
+		contentPane.add(textField);
+		setResizable(false);
+		
+				
+	}
+}

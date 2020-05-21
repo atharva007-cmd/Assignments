@@ -1,0 +1,15 @@
+
+public class User {
+	
+	private int ID;
+	private String firstName, lastName;
+	
+	public User(int ID, String firstName, String lastName)
+	{
+		this.ID = ID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
+	public int getID() { return this.ID; }
+}

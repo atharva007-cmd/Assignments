@@ -1,0 +1,125 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.SpringLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class insertQuery extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField firstNameTextField;
+	private JTextField lastNameTextField;
+	private JButton submitButton;
+	Connection connection;
+	
+
+	// Main Method
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					insertQuery frame = new insertQuery();
+					frame.setVisible(true);
+					
+					// Load Driver
+					Class.forName(loginWindow.driver);
+					
+					// Establish Connection
+					connection = DriverManager.getConnection(loginWindow.url, loginWindow.username, loginWindow.password);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	public insertQuery() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 300);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setTitle("Insert");
+		
+		JLabel firstNameLabel = new JLabel("First Name");
+		firstNameLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		firstNameLabel.setBounds(50, 75, 75, 20);
+		contentPane.add(firstNameLabel);
+		
+		firstNameTextField = new JTextField();
+		firstNameTextField.setFont(new Font("Arial", Font.PLAIN, 11));
+		firstNameTextField.setBounds(125, 75, 200, 20);
+		contentPane.add(firstNameTextField);
+		firstNameTextField.setColumns(10);
+		
+		JLabel lastNameLabel = new JLabel("Last Name");
+		lastNameLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		lastNameLabel.setBounds(50, 125, 75, 20);
+		contentPane.add(lastNameLabel);
+		
+		lastNameTextField = new JTextField();
+		lastNameTextField.setFont(new Font("Arial", Font.PLAIN, 11));
+		lastNameTextField.setColumns(10);
+		lastNameTextField.setBounds(125, 125, 200, 20);
+		contentPane.add(lastNameTextField);
+		
+		submitButton = new JButton("SUBMIT");
+		submitButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String firstName = firstNameTextField.getText();
+				String lastName = lastNameTextField.getText();
+				
+				if (firstName.equals("") || lastName.equals("")) { JOptionPane.showMessageDialog(contentPane, "Text Fields cannot be blank!"); }
+				else
+				{
+					Connection connection = connect();
+					try
+					{
+						PreparedStatement INSERT;
+						INSERT = connection.prepareStatement("INSERT INTO "
+								+ loginWindow.TableName + " (First, Last)"
+								+ " VALUES ('" + firstName + "', '"
+								+ lastName + "');");
+						INSERT.executeUpdate();
+						JOptionPane.showMessageDialog(contentPane, "Added Successfully!");
+					}
+					catch (Exception exception) { JOptionPane.showMessageDialog(contentPane, exception); }
+				}
+			}
+		});
+		submitButton.setFont(new Font("Arial", Font.BOLD, 12));
+		submitButton.setBounds(150, 185, 85, 20);
+		contentPane.add(submitButton);
+		setResizable(false);		
+	}
+	
+	private Connection connect()
+	{
+		try
+		{
+			
+
+			return connection;
+		}
+		catch (Exception exception) { System.err.println(exception); }
+		return null;
+	}
+}

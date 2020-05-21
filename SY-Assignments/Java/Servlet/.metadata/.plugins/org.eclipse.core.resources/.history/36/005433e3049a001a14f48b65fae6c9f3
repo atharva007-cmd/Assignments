@@ -1,0 +1,82 @@
+import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+
+@SuppressWarnings("serial")
+public class displayTable extends JFrame {
+
+	private JPanel contentPane;
+	private static Connection connection;
+	private static ArrayList<User> userList = new ArrayList<User>();
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					// Load Driver
+					Class.forName(loginWindow.driver);
+					
+					// Establish Connection
+					connection = DriverManager.getConnection(loginWindow.url, loginWindow.username, loginWindow.password);
+					// Prepare Statement
+					PreparedStatement CREATE = connection.prepareStatement(
+							"CREATE TABLE IF NOT EXISTS " + loginWindow.TableName
+							+ " (ID INT NOT NULL AUTO_INCREMENT,"
+							+ " First VARCHAR(25),"
+							+ " Last VARCHAR(25),"
+							+ " PRIMARY KEY (ID));");
+					
+					// Process/Execute Statement
+					CREATE.executeUpdate();
+					
+					Statement SELECT = connection.createStatement();
+					ResultSet result = SELECT.executeQuery("SELECT * FROM " + loginWindow.TableName);
+					User newUser;
+					while (result.next())
+					{
+						newUser = new User(result.getInt("ID"), result.getString("First"), result.getString("Last"));
+						userList.add(newUser);
+					}
+
+					
+					displayTable frame = new displayTable();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	// Display Table
+	public displayTable() {
+		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 400, 500);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		setResizable(false);
+		contentPane.setLayout(null);
+		
+		table = new JTable();
+		table.setBounds(50, 130, 300, 1);
+		
+		getContentPane().add(table);
+		
+		DefaultTableModel model = 
+	}
+}

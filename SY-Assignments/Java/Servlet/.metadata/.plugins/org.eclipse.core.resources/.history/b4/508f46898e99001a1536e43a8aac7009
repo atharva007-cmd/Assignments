@@ -1,0 +1,77 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.Color;
+
+public class loginWindow {
+
+	private JFrame frame;
+	private JTextField userNameTextField;
+	private JTextField passwordTextField;
+
+	// Main Method
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try
+				{
+					loginWindow window = new loginWindow();
+					window.frame.setVisible(true);
+				} 
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	// Login Window Initialization Method
+	public loginWindow()
+	{
+		initialize();
+	}
+
+
+	
+	// Initialize Method
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBackground(Color.GRAY);
+		frame.setBounds(100, 100, 400, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Login Window");
+		frame.getContentPane().setLayout(null);
+		
+		JLabel userNameLabel = new JLabel("Username");
+		userNameLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		userNameLabel.setBounds(50, 100, 70, 20);
+		frame.getContentPane().add(userNameLabel);
+		
+		userNameTextField = new JTextField();
+		userNameTextField.setFont(new Font("Arial", Font.PLAIN, 10));
+		userNameTextField.setText("Enter DB Username");
+		userNameTextField.setBounds(120, 100, 200, 20);
+		frame.getContentPane().add(userNameTextField);
+		userNameTextField.setColumns(10);
+		
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		passwordLabel.setBounds(50, 150, 70, 20);
+		frame.getContentPane().add(passwordLabel);
+		
+		passwordTextField = new JTextField();
+		passwordTextField.setText("Enter DB Password");
+		passwordTextField.setFont(new Font("Arial", Font.PLAIN, 10));
+		passwordTextField.setColumns(10);
+		passwordTextField.setBounds(120, 150, 200, 20);
+		frame.getContentPane().add(passwordTextField);
+		
+		
+	}
+}

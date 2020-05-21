@@ -1,0 +1,49 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Panel;
+import javax.swing.JLabel;
+
+public class insertQuery extends JFrame {
+
+	private JPanel contentPane;
+
+	// Main Method
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					insertQuery frame = new insertQuery();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	public insertQuery() {
+		setTitle("Insert");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 500);
+		getContentPane().setLayout(null);
+		setResizable(false);
+		
+		Panel panel = new Panel();
+		panel.setBounds(0, 0, 400, 500);
+		getContentPane().add(panel);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		setBounds(50, 50, 50, 20);
+		panel.add(lblNewLabel);
+		contentPane = new JPanel();
+		
+		
+		
+	}
+}

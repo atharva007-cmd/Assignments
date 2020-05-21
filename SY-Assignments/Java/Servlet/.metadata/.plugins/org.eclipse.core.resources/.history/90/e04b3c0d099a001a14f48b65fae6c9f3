@@ -1,0 +1,116 @@
+import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+
+@SuppressWarnings("serial")
+public class displayTable extends JFrame {
+
+	private JPanel contentPane;
+	private static Connection connection;
+	private static ArrayList<User> userList = new ArrayList<User>();
+	private JTable table;
+
+	// Main method
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					// Load Driver
+					Class.forName(loginWindow.driver);
+					
+					// Establish Connection
+					connection = DriverManager.getConnection(loginWindow.url, loginWindow.username, loginWindow.password);
+					// Prepare Statement
+					PreparedStatement CREATE = connection.prepareStatement(
+							"CREATE TABLE IF NOT EXISTS " + loginWindow.TableName
+							+ " (ID INT NOT NULL AUTO_INCREMENT,"
+							+ " First VARCHAR(25),"
+							+ " Last VARCHAR(25),"
+							+ " PRIMARY KEY (ID));");
+					
+					// Process/Execute Statement
+					CREATE.executeUpdate();
+					
+					Statement SELECT = connection.createStatement();
+					ResultSet result = SELECT.executeQuery("SELECT * FROM " + loginWindow.TableName);
+					User newUser;
+					while (result.next())
+					{
+						newUser = new User(result.getInt("ID"), result.getString("First"), result.getString("Last"));
+						userList.add(newUser);
+					}
+
+					
+					displayTable frame = new displayTable();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	// Display Table
+	public displayTable() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 400, 500);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		setTitle("Display");
+		setResizable(false);
+		contentPane.setLayout(null);
+		
+		JLabel tableNameLabel = new JLabel("Employee Table");
+		tableNameLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		tableNameLabel.setBounds(150, 10, 100, 25);
+		contentPane.add(tableNameLabel);
+		
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("Name");
+		Object[] row = new Object[2];
+		for (int i=0; i<userList.size(); i++)
+		{
+			row[0] = userList.get(i).getID();
+			row[1] = userList.get(i).getFirstName() + " " + userList.get(i).getLastName();
+			model.addRow(row);
+		}
+		
+		JTable table = new JTable(new Object[][] {{"115", "Ramesh"}, {"120", "Adithya"}, {"125", "Jai"}, {"130", "Chaitanya"}, {"135", "Raja"}}, new String[] {"Employee ID", "Employee Name"}) {
+	         public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+	            Component comp = super.prepareRenderer(renderer, row, column);
+	            Color alternateColor = new Color(200, 201, 210);
+	            Color whiteColor = Color.WHITE;
+	            if(!comp.getBackground().equals(getSelectionBackground())) {
+	               Color c = (row % 2 == 0 ? alternateColor : whiteColor);
+	               comp.setBackground(bg);
+	               c = null;
+	            }
+	         }
+	      };
+		
+		table = new JTable(model);
+		table.setRowHeight(20);
+		table.setSize(new Dimension(135, 20));
+		table.setName("myModel");
+		table.setFont(new Font("Arial", Font.ITALIC, 10));
+		table.setBounds(50, 50, 300, 375);
+		getContentPane().add(table);
+	}
+}

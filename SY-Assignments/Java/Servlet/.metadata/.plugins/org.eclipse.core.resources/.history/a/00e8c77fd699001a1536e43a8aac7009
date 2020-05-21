@@ -1,0 +1,91 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.util.Scanner;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+public class operationFrame extends JFrame {
+
+	private JPanel contentPane;
+	private static final String url = "jdbc:mysql://localhost:3306/jdbc";
+	private static final String driver = "com.mysql.cj.jdbc.Driver";
+	private static final String TableName = "Employee";
+	static Scanner scanner = new Scanner(System.in);
+
+	
+	// Main Method
+	public static void main(String[] args) {
+		
+		try
+		{
+			Connection connection = connect();
+			// Prepare Statement
+			PreparedStatement CREATE;
+		
+			CREATE = connection.prepareStatement(
+					"CREATE TABLE IF NOT EXISTS " + TableName
+					+ " (ID INT NOT NULL AUTO_INCREMENT,"
+					+ " First VARCHAR(25),"
+					+ " Last VARCHAR(25),"
+					+ " PRIMARY KEY (ID));");
+			
+			// Process/Execute Statement
+			CREATE.executeUpdate();
+		}	
+		catch (Exception exception) { System.err.println(exception); }
+		finally {  }
+					
+
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					operationFrame frame = new operationFrame();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	// Frame Initialization
+	public operationFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+	}
+	
+	
+	// Loads drivers and establishes connection with the database.
+	public static Connection connect()
+	{
+		try
+		{
+			// Load Driver
+			Class.forName(driver);
+			
+			// Establish Connection
+			Connection connection = DriverManager.getConnection(url, loginWindow.username, loginWindow.password);
+			
+			return connection;
+		}
+		catch (Exception exception) { System.err.println(exception); }
+		
+		System.out.println("Connection Failed!");
+		return null;
+	}
+
+}

@@ -1,0 +1,240 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dialog;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JRadioButton;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+
+public class mainMenu extends JFrame {
+
+	private JPanel contentPane;
+	private JRadioButton createTableButton, insertQueryButton, deleteQueryButton, updateQueryButton, displayTableButton, dropTableButton;
+	private JButton submitButton;
+	private JLabel dropTableIconLabel, createTableIconLabel, displayTableIconLabel, insertQueryIconLabel, deleteQueryIconLabel, updateQueryIconLabel;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					mainMenu frame = new mainMenu();
+					frame.setVisible(true);
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	public mainMenu() {
+		setTitle("Main Menu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 500);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("MENU");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 25));
+		lblNewLabel.setBackground(Color.WHITE);
+		lblNewLabel.setBounds(80, 75, 100, 20);
+		contentPane.add(lblNewLabel);
+		
+		dropTableIconLabel = new JLabel("");
+		dropTableIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\dropTable (Custom).jpg"));
+		dropTableIconLabel.setBounds(220, 130, 220, 220);
+		dropTableIconLabel.setVisible(false);
+		contentPane.add(dropTableIconLabel);
+		
+		createTableIconLabel = new JLabel("");
+		createTableIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\createTable (Custom).jpg"));
+		createTableIconLabel.setBounds(220, 130, 220, 220);
+		createTableIconLabel.setVisible(false);
+		contentPane.add(createTableIconLabel);
+		
+		displayTableIconLabel = new JLabel("");
+		displayTableIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\displayTable (Custom).jpg"));
+		displayTableIconLabel.setBounds(220, 130, 220, 220);
+		displayTableIconLabel.setVisible(false);
+		contentPane.add(displayTableIconLabel);
+		
+		insertQueryIconLabel = new JLabel("");
+		insertQueryIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\updateQuery (Custom).jpg"));
+		insertQueryIconLabel.setBounds(220, 130, 220, 220);
+		insertQueryIconLabel.setVisible(false);
+		contentPane.add(insertQueryIconLabel);
+		
+		deleteQueryIconLabel = new JLabel("");
+		deleteQueryIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\deleteQuery (Custom).jpg"));
+		deleteQueryIconLabel.setBounds(220, 130, 220, 220);
+		deleteQueryIconLabel.setVisible(false);
+		contentPane.add(deleteQueryIconLabel);
+		
+		updateQueryIconLabel = new JLabel("");
+		updateQueryIconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\updateQuery (Custom).jpg"));
+		updateQueryIconLabel.setBounds(220, 130, 220, 220);
+		updateQueryIconLabel.setVisible(false);
+		contentPane.add(updateQueryIconLabel);
+		
+		// Create Table Button
+		createTableButton = new JRadioButton("Create Table");
+		createTableButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		createTableButton.setBounds(80, 130, 100, 20);
+		contentPane.add(createTableButton);
+		createTableButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (createTableButton.isSelected()) {
+					dropTableButton.setSelected(false);
+					insertQueryButton.setSelected(false);
+					deleteQueryButton.setSelected(false);
+					updateQueryButton.setSelected(false);
+					displayTableButton.setSelected(false);
+					
+					createTableIconLabel.setVisible(true);
+					dropTableIconLabel.setVisible(false);
+					displayTableIconLabel.setVisible(false);
+					insertQueryIconLabel.setVisible(false);
+					deleteQueryIconLabel.setVisible(false);
+					updateQueryIconLabel.setVisible(false);
+				}
+			}
+		});
+		
+		
+		// Insert Query Button
+		insertQueryButton = new JRadioButton("Insert Query");
+		insertQueryButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		insertQueryButton.setBounds(80, 170, 100, 20);
+		contentPane.add(insertQueryButton);
+		insertQueryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (insertQueryButton.isSelected()) {
+					createTableButton.setSelected(false);
+					dropTableButton.setSelected(false);
+					deleteQueryButton.setSelected(false);
+					updateQueryButton.setSelected(false);
+					displayTableButton.setSelected(false);
+					
+					createTableIconLabel.setVisible(false);
+					dropTableIconLabel.setVisible(false);
+					displayTableIconLabel.setVisible(false);
+					insertQueryIconLabel.setVisible(true);
+					deleteQueryIconLabel.setVisible(false);
+					updateQueryIconLabel.setVisible(false);
+				}
+			}
+		});
+		
+		
+		// Delete Query Button
+		deleteQueryButton = new JRadioButton("Delete Query");
+		deleteQueryButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		deleteQueryButton.setBounds(80, 210, 100, 20);
+		contentPane.add(deleteQueryButton);
+		deleteQueryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (deleteQueryButton.isSelected()) {
+					createTableButton.setSelected(false);
+					insertQueryButton.setSelected(false);
+					dropTableButton.setSelected(false);
+					updateQueryButton.setSelected(false);
+					displayTableButton.setSelected(false);
+				}
+			}
+		});
+		
+		
+		// Update Query Button
+		updateQueryButton = new JRadioButton("Update Query");
+		updateQueryButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		updateQueryButton.setBounds(80, 250, 100, 20);
+		contentPane.add(updateQueryButton);
+		updateQueryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (updateQueryButton.isSelected()) {
+					createTableButton.setSelected(false);
+					insertQueryButton.setSelected(false);
+					deleteQueryButton.setSelected(false);
+					dropTableButton.setSelected(false);
+					displayTableButton.setSelected(false);
+				}
+			}
+		});
+		
+		
+		// Display Table Button
+		displayTableButton = new JRadioButton("Display Table");
+		displayTableButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		displayTableButton.setBounds(80, 290, 100, 20);
+		contentPane.add(displayTableButton);
+		displayTableButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (displayTableButton.isSelected()) {
+					createTableButton.setSelected(false);
+					insertQueryButton.setSelected(false);
+					deleteQueryButton.setSelected(false);
+					updateQueryButton.setSelected(false);
+					dropTableButton.setSelected(false);
+					
+					createTableIconLabel.setVisible(false);
+					dropTableIconLabel.setVisible(false);
+					displayTableIconLabel.setVisible(true);
+				}
+			}
+		});
+		
+		
+		// Drop Table Button
+		dropTableButton = new JRadioButton("Drop Table");
+		dropTableButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		dropTableButton.setBounds(80, 330, 100, 20);
+		contentPane.add(dropTableButton);
+		dropTableButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (dropTableButton.isSelected()) {
+					createTableButton.setSelected(false);
+					insertQueryButton.setSelected(false);
+					deleteQueryButton.setSelected(false);
+					updateQueryButton.setSelected(false);
+					displayTableButton.setSelected(false);
+					
+					createTableIconLabel.setVisible(false);
+					dropTableIconLabel.setVisible(true);
+					displayTableIconLabel.setVisible(false);
+				}
+			}
+		});
+		
+		
+		// Submit Button
+		submitButton = new JButton("SUBMIT");
+		submitButton.setFont(new Font("Arial", Font.BOLD, 12));
+		submitButton.setBounds(80, 380, 100, 25);
+		contentPane.add(submitButton);
+		submitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selectionString = null;
+				if (createTableButton.isSelected()) { selectionString="Create Table"; }
+				else if (insertQueryButton.isSelected()) { selectionString="Insert Query"; }
+				else if (deleteQueryButton.isSelected()) { selectionString="Delete Query"; }
+				else if (updateQueryButton.isSelected()) { selectionString="Update Query"; }
+				else if (displayTableButton.isSelected()) { selectionString="Display Table"; }
+				else if (dropTableButton.isSelected()) { selectionString="Drop Table"; }
+				else { JOptionPane.showMessageDialog(contentPane, "Select one option!"); }
+			}
+		});
+			
+	}
+}

@@ -1,0 +1,122 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JTextPane;
+
+import com.sun.java.swing.plaf.windows.resources.windows;
+
+import javax.swing.JSpinner;
+import javax.swing.JSeparator;
+import javax.swing.JDesktopPane;
+import javax.swing.ImageIcon;
+
+public class loginWindow {
+
+	private JFrame frame;
+	private JTextField userNameTextField;
+	private JButton loginButton;
+	private JPasswordField passwordTextField;
+	private final String username="root", password="toor";
+	private JLabel iconLabel;
+
+	// Main Method
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try
+				{
+					loginWindow window = new loginWindow();
+					window.frame.setVisible(true);
+					window.frame.setResizable(false);
+				} 
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	// Login Window Initialization Method
+	public loginWindow()
+	{
+		initialize();
+	}
+
+
+	
+	// Initialize Method
+	private void initialize() {
+		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frame.setBackground(Color.GRAY);
+		frame.setBounds(100, 100, 400, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Login Window");
+		frame.getContentPane().setLayout(null);
+		
+		JLabel userNameLabel = new JLabel("Username");
+		userNameLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		userNameLabel.setBounds(50, 100, 70, 20);
+		frame.getContentPane().add(userNameLabel);
+		
+		iconLabel = new JLabel("");
+		iconLabel.setIcon(new ImageIcon("G:\\dev\\Servlet\\assets\\icons\\loginUserIcon (Custom).png"));
+		iconLabel.setBounds(275, 100, 75, 75);
+		frame.getContentPane().add(iconLabel);
+		
+		userNameTextField = new JTextField();
+		userNameTextField.setFont(new Font("Arial", Font.PLAIN, 10));
+		userNameTextField.setBounds(120, 100, 130, 20);
+		frame.getContentPane().add(userNameTextField);
+		userNameTextField.setColumns(10);
+		
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		passwordLabel.setBounds(50, 150, 70, 20);
+		frame.getContentPane().add(passwordLabel);
+		
+		passwordTextField = new JPasswordField();
+		passwordTextField.setBounds(120, 150, 130, 20);
+		frame.getContentPane().add(passwordTextField);
+		
+		loginButton = new JButton("LOGIN");
+		loginButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String inputUsername = userNameTextField.getText();
+				String inputPassword = passwordTextField.getText();
+				
+				if(inputUsername.equals(username) && inputPassword.equals(password))
+				{
+					JOptionPane.showMessageDialog(frame, "Successful Login!");
+					mainMenu mainMenuFrame = new mainMenu();
+					mainMenuFrame.setVisible(true);
+					frame.setVisible(false);
+				}
+				else if (inputUsername.equals("") && inputPassword.equals(""))
+				{
+					JOptionPane.showMessageDialog(frame, "Credentials cannot be blank!");
+				}
+				else { JOptionPane.showMessageDialog(frame, "Wrong Credentials. Try Again!"); }
+			}
+		});
+		loginButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		loginButton.setBounds(150, 230, 100, 20);
+		frame.getContentPane().add(loginButton);
+
+	}
+}

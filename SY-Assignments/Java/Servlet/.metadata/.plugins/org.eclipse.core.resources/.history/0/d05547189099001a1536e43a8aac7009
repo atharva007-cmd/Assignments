@@ -1,0 +1,98 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JTextPane;
+
+public class loginWindow {
+
+	private JFrame frame;
+	private JTextField userNameTextField;
+	private JButton loginButton;
+	private JPasswordField passwordTextField;
+
+	// Main Method
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try
+				{
+					loginWindow window = new loginWindow();
+					window.frame.setVisible(true);
+				} 
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	// Login Window Initialization Method
+	public loginWindow()
+	{
+		initialize();
+	}
+
+
+	
+	// Initialize Method
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBackground(Color.GRAY);
+		frame.setBounds(100, 100, 400, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Login Window");
+		frame.getContentPane().setLayout(null);
+		
+		JLabel userNameLabel = new JLabel("Username");
+		userNameLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		userNameLabel.setBounds(50, 100, 70, 20);
+		frame.getContentPane().add(userNameLabel);
+		
+		userNameTextField = new JTextField();
+		userNameTextField.setFont(new Font("Arial", Font.PLAIN, 10));
+		userNameTextField.setBounds(120, 100, 200, 20);
+		frame.getContentPane().add(userNameTextField);
+		userNameTextField.setColumns(10);
+		
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+		passwordLabel.setBounds(50, 150, 70, 20);
+		frame.getContentPane().add(passwordLabel);
+		
+		loginButton = new JButton("LOGIN");
+		loginButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String username = userNameTextField.getText();
+				String password = passwordTextField.getText();
+				System.out.println(username + password);
+			}
+		});
+		loginButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		loginButton.setBounds(150, 230, 100, 20);
+		frame.getContentPane().add(loginButton);
+		
+		passwordTextField = new JPasswordField();
+		passwordTextField.setBounds(120, 150, 200, 20);
+		frame.getContentPane().add(passwordTextField);
+		
+		JTextPane txtpnHello = new JTextPane();
+		txtpnHello.setText("hello");
+		txtpnHello.setBounds(284, 45, 50, 19);
+		frame.getContentPane().add(txtpnHello);
+		
+		
+	}
+}

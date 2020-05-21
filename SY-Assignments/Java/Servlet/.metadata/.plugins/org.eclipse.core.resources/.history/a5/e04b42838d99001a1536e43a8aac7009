@@ -1,0 +1,43 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+public class loginWindow {
+
+	private JFrame frame;
+
+	// Main Method
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run() 
+			{
+				try
+				{
+					loginWindow window = new loginWindow();
+					window.frame.setVisible(true);
+				} 
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	
+	// Login Window Initialization Method
+	public loginWindow()
+	{
+		initialize();
+	}
+
+
+	
+	// Initialize Method
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}

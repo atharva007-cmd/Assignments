@@ -1,0 +1,148 @@
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.EventQueue;
+import java.util.Scanner;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+
+public class operationFrame extends JFrame {
+
+	private static JPanel contentPane;
+	private static final String url = "jdbc:mysql://localhost:3306/jdbc";
+	private static final String driver = "com.mysql.cj.jdbc.Driver";
+	private static final String TableName = "Employee";
+	static Scanner scanner = new Scanner(System.in);
+
+	
+	// Main Method
+	public static void main(String[] args) {
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try
+				{
+					operationFrame frame = new operationFrame();
+					frame.setVisible(true);
+					
+					Connection connection = connect();
+					// Prepare Statement
+					PreparedStatement CREATE;
+				
+					CREATE = connection.prepareStatement(
+							"CREATE TABLE IF NOT EXISTS " + TableName
+							+ " (ID INT NOT NULL AUTO_INCREMENT,"
+							+ " First VARCHAR(25),"
+							+ " Last VARCHAR(25),"
+							+ " PRIMARY KEY (ID));");
+					
+					// Process/Execute Statement
+					CREATE.executeUpdate();
+				}
+				catch (Exception exception) { System.err.println(exception); }
+			}
+		});
+	}
+
+	
+	// Default Constructor
+	public operationFrame() { }
+	
+	
+	// Frame Initialization
+	public operationFrame(String operation) {
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		getContentPane().setLayout(null);
+		setTitle(operation);
+		
+		JButton exitButton = new JButton("Exit");
+		exitButton.setFont(new Font("Arial", Font.PLAIN, 14));
+		exitButton.setBounds(151, 100, 85, 21);
+		getContentPane().add(exitButton);
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.setVisible(false);
+			}
+		});
+		
+		
+		switch (operation) {
+			case "Insert Query": {
+				insertQuery();
+				break;
+			}
+			
+			case "Delete Query": {
+				deleteQuery();
+				break;
+			}
+			
+			case "Display Table": {
+				displayTable();
+				break;
+			}
+			
+			case "Update Query": {
+				updateQuery();
+				break;
+			}
+		}
+	}
+
+
+	private void updateQuery() {
+		System.out.println("Update Query");	
+	}
+
+
+	private void displayTable() {
+		System.out.println("Display Table");
+	}
+
+
+	private void deleteQuery()
+	{
+		System.out.println("Delete Query");
+	}
+
+
+	private void insertQuery()
+	{
+		System.out.println("Insert Query");
+	}
+
+
+	// Loads drivers and establishes connection with the database.
+	public static Connection connect()
+	{
+		try
+		{
+			// Load Driver
+			Class.forName(driver);
+			
+			// Establish Connection
+			Connection connection = DriverManager.getConnection(url, loginWindow.username, loginWindow.password);
+			
+			return connection;
+		}
+		catch (Exception exception) { System.err.println(exception); }
+		
+		System.out.println("Connection Failed!");
+		return null;
+	}
+}
