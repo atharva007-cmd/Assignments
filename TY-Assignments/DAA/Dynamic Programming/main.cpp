@@ -142,7 +142,7 @@ int getObstCost (int* nodes, int* frequencies, int population, std::vector<int> 
 	}
 
 	// Display frequency calculation table
-	std::cout << "\nFrequency Table:\n";
+	std::cout << "\nCost Table:\n";
 	for (int i=0; i<population; i++) {
 		for (int j=0; j<population; j++) {
 			if (j >= i) {
