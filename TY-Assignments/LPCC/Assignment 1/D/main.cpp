@@ -1,17 +1,33 @@
-#include "literal-pool.h"
+#include "table.h"
 
 int main (int argc, char* argv[]) {
 
-	ifstream filestream;
-	openFile(filestream, argv[1]);
+	std::ifstream symbolFilestream, literalFilestream, poolFilestream;
+	openFile(symbolFilestream, argv[1]);
+	openFile(literalFilestream, argv[1]);
+	openFile(poolFilestream, argv[1]);
 
-	vector<LiteralPoolTableEntry> literalPoolTable;
+	std::vector<SymbolTableEntry> symbolTable;
+	symbolTable.reserve(5);
+
+	std::vector<LiteralTableEntry> literalTable;
+	literalTable.reserve(5);
+	
+	std::vector<LiteralPoolTableEntry> literalPoolTable;
 	literalPoolTable.reserve(5);
 
-	handleTokens(filestream, literalPoolTable);
+	handleTokens(symbolFilestream, symbolTable);
+	printSymbolTable (symbolTable);
 
-	printLiteralPoolTable(literalPoolTable);
+	handleTokens(literalFilestream, literalTable);
+	printLiteralTable (literalTable);
+
+	handleTokens(poolFilestream, literalPoolTable);
+	printLiteralPoolTable (literalPoolTable);
 	
-	filestream.close();
+	symbolFilestream.close();
+	literalFilestream.close();
+	poolFilestream.close();
+
 	return 0;
 }

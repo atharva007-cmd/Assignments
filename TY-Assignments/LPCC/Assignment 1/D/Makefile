@@ -1,9 +1,9 @@
 all:
-	g++ main.cpp literal-pool.cpp -o literal-pool
-	./literal-pool assembly-code.txt
+	g++ main.cpp table.cpp -o output
+	./output assembly-code.txt
 
 compile:
-	g++ literal-pool.cpp -o literal-pool
+	g++ main.cpp table.cpp -o output
 
 run:
-	./literal-pool assembly-code.txt
+	./output assembly-code.txt
